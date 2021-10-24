@@ -1,0 +1,36 @@
+package codigo;
+
+import java_cup.runtime.Symbol;
+
+parser code
+{:
+    private Symbol s;
+    
+    public void syntax_error(Symbol s){
+        this.s = s;
+    }
+
+    public Symbol getS(){
+        return this.s;
+}
+:};
+
+terminal Linea, Gato, Apostrofe, SignoPeso, ORG, Opcode, 
+    DosPuntos, Mnemonico, Numero, ERROR;
+non terminal INICIO
+
+starts with INICIO;
+
+INICIO ::=
+    ORG SignoPeso Numero
+;
+
+INH ::=
+    1B DosPuntos aba |
+    3A DosPuntos abx |
+    183A DosPuntos aby |
+;
+
+SENTENCIA_INH ::=
+    Opcode DosPuntos Mnemonico Comentario
+;
